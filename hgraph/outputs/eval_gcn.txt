@@ -1,0 +1,26 @@
+total labeled examples: 53739
+
+=== random_80_20  (train n=42992, test n=10747) ===
+  overall                  n= 10747  macro_F1=0.729  per_class_F1(stopped,slow,moving,fast)=[0.891, 0.348, 0.834, 0.844]
+  vru_only                 n=   935  macro_F1=0.688  per_class_F1(stopped,slow,moving,fast)=[0.876, 0.749, 0.595, 0.533]
+  low_point_count(<=5pts)  n=  1060  macro_F1=0.737  per_class_F1(stopped,slow,moving,fast)=[0.915, 0.348, 0.784, 0.901]
+  occlusion=NOT            n=  8539  macro_F1=0.741  per_class_F1(stopped,slow,moving,fast)=[0.895, 0.38, 0.84, 0.85]
+  occlusion=PARTIAL        n=  2137  macro_F1=0.673  per_class_F1(stopped,slow,moving,fast)=[0.88, 0.262, 0.795, 0.753]
+  occlusion=FULL           n=    71  macro_F1=0.657  per_class_F1(stopped,slow,moving,fast)=[0.746, 0.286, 0.741, 0.857]
+
+=== scenario_holdout(s01-03->s04)  (train n=45375, test n=8364) ===
+  overall                  n=  8364  macro_F1=0.656  per_class_F1(stopped,slow,moving,fast)=[0.886, 0.227, 0.753, 0.756]
+  vru_only                 n=0 (empty)
+  low_point_count(<=5pts)  n=  1210  macro_F1=0.690  per_class_F1(stopped,slow,moving,fast)=[0.946, 0.244, 0.698, 0.871]
+  occlusion=NOT            n=  8255  macro_F1=0.659  per_class_F1(stopped,slow,moving,fast)=[0.889, 0.233, 0.757, 0.759]
+  occlusion=PARTIAL        n=   108  macro_F1=0.373  per_class_F1(stopped,slow,moving,fast)=[0.607, 0.087, 0.296, 0.5]
+  occlusion=FULL           n=     1  macro_F1=0.250  per_class_F1(stopped,slow,moving,fast)=[1.0, 0.0, 0.0, 0.0]
+
+=== day_night_holdout(->NIGHT)  (train n=45375, test n=8364) ===
+  overall                  n=  8364  macro_F1=0.656  per_class_F1(stopped,slow,moving,fast)=[0.886, 0.227, 0.753, 0.756]
+  vru_only                 n=0 (empty)
+  low_point_count(<=5pts)  n=  1210  macro_F1=0.690  per_class_F1(stopped,slow,moving,fast)=[0.946, 0.244, 0.698, 0.871]
+  occlusion=NOT            n=  8255  macro_F1=0.659  per_class_F1(stopped,slow,moving,fast)=[0.889, 0.233, 0.757, 0.759]
+  occlusion=PARTIAL        n=   108  macro_F1=0.373  per_class_F1(stopped,slow,moving,fast)=[0.607, 0.087, 0.296, 0.5]
+  occlusion=FULL           n=     1  macro_F1=0.250  per_class_F1(stopped,slow,moving,fast)=[1.0, 0.0, 0.0, 0.0]
+

@@ -1,0 +1,49 @@
+# Default hyperparameters, thresholds, and paths for the hypergraph pipeline.
+# See claude.md for the meaning and provenance of each value.
+
+paths:
+  r2_root: r2
+  r4_root: r4
+  output_dir: hgraph/outputs
+
+hyperedges:
+  bev_threshold: 10.0       # metres — H1 spatial edge cutoff
+  tracklet_k: 5              # frames — H2 window size
+  vru_radius_veh: 15.0       # metres — vehicle-to-VRU H4 radius
+  vru_radius_ped: 3.0        # metres — ped-to-ped H4 radius
+  project_horizon: 1.5       # seconds — H3 forward projection
+  v2x_init_weight: 0.6       # initial soft weight for vehicle obs in H5
+
+kinematics:
+  dt_max: 0.30                # seconds — velocity filter upper bound
+  vxy_max: 40.0                # m/s    — velocity filter upper bound
+  axy_max: 10.0                 # m/s2   — acceleration filter
+  gap_flag_threshold: 0.15      # seconds — flag missing frames in track
+  full_occlusion_num_points: 2  # <= this many points: skip velocity derivation
+
+pairing:
+  max_dt: 0.10   # seconds — max north/south (or roadside/vehicle) timestamp gap for a positive pair
+
+model:
+  encoder_dim: 256    # HGNN hidden dimension
+  projector_dim: 128  # projector output dimension
+
+loss:
+  tau: 0.5            # NT-Xent temperature
+  lambda_strl: 0.5    # STRL loss weight in combined objective
+
+train:
+  lr: 1.0e-3
+  batch_size: 32       # number of frame pairs per batch
+  epochs: 100
+
+classes:
+  # 8-class one-hot order for node features (per claude.md)
+  - CAR
+  - TRUCK
+  - VAN
+  - TRAILER
+  - BUS
+  - PEDESTRIAN
+  - BICYCLE
+  - MOTORCYCLE

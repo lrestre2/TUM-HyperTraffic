@@ -1,0 +1,21 @@
+# all claude-related stuff
+claude.md
+.claude
+make_figures.py
+
+# DATA
+dataset_reports
+r2
+r4
+
+# outputs
+hgraph/outputs/
+
+# models and trash
+*.pth
+*.ckpt
+*.csv
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.env

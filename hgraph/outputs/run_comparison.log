@@ -1,0 +1,197 @@
+=== training HGNN (Thu Jul  9 07:44:34 AM EDT 2026) ===
+model: hgnn  train pairs: 1597  val pairs: 563  device: cuda:1
+epoch   1  train_loss=3.5138  val_loss=4.2057  (4.9s)
+epoch   2  train_loss=3.2353  val_loss=4.2559  (4.3s)
+epoch   3  train_loss=3.1284  val_loss=4.2579  (4.3s)
+epoch   4  train_loss=3.0733  val_loss=4.2342  (4.5s)
+epoch   5  train_loss=3.0065  val_loss=4.3308  (4.3s)
+epoch   6  train_loss=2.9702  val_loss=4.2948  (4.4s)
+epoch   7  train_loss=2.9239  val_loss=4.3170  (4.3s)
+epoch   8  train_loss=2.8765  val_loss=4.3135  (4.3s)
+epoch   9  train_loss=2.8463  val_loss=4.2739  (4.4s)
+epoch  10  train_loss=2.8198  val_loss=4.2817  (4.3s)
+epoch  11  train_loss=2.8014  val_loss=4.2536  (4.5s)
+epoch  12  train_loss=2.7839  val_loss=4.2975  (4.5s)
+epoch  13  train_loss=2.7600  val_loss=4.3169  (4.4s)
+epoch  14  train_loss=2.7393  val_loss=4.3181  (4.3s)
+epoch  15  train_loss=2.7328  val_loss=4.3123  (4.5s)
+epoch  16  train_loss=2.6933  val_loss=4.3383  (4.5s)
+epoch  17  train_loss=2.6746  val_loss=4.3531  (4.5s)
+epoch  18  train_loss=2.6636  val_loss=4.4358  (4.4s)
+epoch  19  train_loss=2.6676  val_loss=4.4627  (4.3s)
+epoch  20  train_loss=2.6525  val_loss=4.4586  (4.3s)
+epoch  21  train_loss=2.6323  val_loss=4.4675  (4.3s)
+epoch  22  train_loss=2.6205  val_loss=4.4819  (4.4s)
+epoch  23  train_loss=2.6051  val_loss=4.4876  (4.3s)
+epoch  24  train_loss=2.6073  val_loss=4.4622  (4.4s)
+epoch  25  train_loss=2.5865  val_loss=4.5634  (4.3s)
+epoch  26  train_loss=2.5871  val_loss=4.6150  (4.4s)
+epoch  27  train_loss=2.5773  val_loss=4.6543  (4.3s)
+epoch  28  train_loss=2.5679  val_loss=4.4833  (4.2s)
+epoch  29  train_loss=2.5706  val_loss=4.6033  (4.3s)
+epoch  30  train_loss=2.5563  val_loss=4.6309  (4.4s)
+epoch  31  train_loss=2.5408  val_loss=4.6188  (4.5s)
+epoch  32  train_loss=2.5380  val_loss=4.5994  (4.4s)
+epoch  33  train_loss=2.5397  val_loss=4.7154  (4.3s)
+epoch  34  train_loss=2.5504  val_loss=4.6425  (4.5s)
+epoch  35  train_loss=2.5289  val_loss=4.6742  (4.5s)
+epoch  36  train_loss=2.5266  val_loss=4.6512  (4.3s)
+epoch  37  train_loss=2.5328  val_loss=4.6482  (4.4s)
+epoch  38  train_loss=2.5207  val_loss=4.6227  (4.3s)
+epoch  39  train_loss=2.5219  val_loss=4.6907  (4.3s)
+epoch  40  train_loss=2.5137  val_loss=4.6049  (4.4s)
+
+=== training GCN baseline (Thu Jul  9 07:47:33 AM EDT 2026) ===
+model: gcn  train pairs: 1597  val pairs: 563  device: cuda:1
+epoch   1  train_loss=3.5850  val_loss=4.3145  (4.8s)
+epoch   2  train_loss=3.3246  val_loss=4.2405  (4.3s)
+epoch   3  train_loss=3.1753  val_loss=4.3181  (4.3s)
+epoch   4  train_loss=3.0797  val_loss=4.3013  (4.2s)
+epoch   5  train_loss=3.0193  val_loss=4.3667  (4.2s)
+epoch   6  train_loss=2.9739  val_loss=4.2776  (4.4s)
+epoch   7  train_loss=2.9226  val_loss=4.2757  (4.1s)
+epoch   8  train_loss=2.8769  val_loss=4.2836  (4.2s)
+epoch   9  train_loss=2.8576  val_loss=4.2774  (4.1s)
+epoch  10  train_loss=2.8343  val_loss=4.2656  (4.1s)
+epoch  11  train_loss=2.7938  val_loss=4.2670  (4.1s)
+epoch  12  train_loss=2.7691  val_loss=4.2516  (4.3s)
+epoch  13  train_loss=2.7569  val_loss=4.2817  (4.2s)
+epoch  14  train_loss=2.7316  val_loss=4.3532  (4.2s)
+epoch  15  train_loss=2.7069  val_loss=4.3469  (4.3s)
+epoch  16  train_loss=2.6793  val_loss=4.3780  (4.3s)
+epoch  17  train_loss=2.6644  val_loss=4.4140  (4.4s)
+epoch  18  train_loss=2.6542  val_loss=4.4715  (4.2s)
+epoch  19  train_loss=2.6317  val_loss=4.4807  (4.1s)
+epoch  20  train_loss=2.6276  val_loss=4.4650  (4.1s)
+epoch  21  train_loss=2.6228  val_loss=4.4662  (4.3s)
+epoch  22  train_loss=2.6105  val_loss=4.5090  (4.3s)
+epoch  23  train_loss=2.6051  val_loss=4.5179  (4.1s)
+epoch  24  train_loss=2.5989  val_loss=4.5290  (4.2s)
+epoch  25  train_loss=2.5894  val_loss=4.7153  (4.3s)
+epoch  26  train_loss=2.5697  val_loss=4.6676  (4.2s)
+epoch  27  train_loss=2.5652  val_loss=4.4813  (4.3s)
+epoch  28  train_loss=2.5549  val_loss=4.6515  (4.3s)
+epoch  29  train_loss=2.5521  val_loss=4.6328  (4.2s)
+epoch  30  train_loss=2.5567  val_loss=4.6729  (4.2s)
+epoch  31  train_loss=2.5574  val_loss=4.6383  (4.3s)
+epoch  32  train_loss=2.5418  val_loss=4.7692  (4.3s)
+epoch  33  train_loss=2.5302  val_loss=4.5901  (4.3s)
+epoch  34  train_loss=2.5285  val_loss=4.6711  (4.4s)
+epoch  35  train_loss=2.5280  val_loss=4.6655  (4.4s)
+epoch  36  train_loss=2.5294  val_loss=4.6145  (4.3s)
+epoch  37  train_loss=2.5355  val_loss=4.6879  (4.3s)
+epoch  38  train_loss=2.5310  val_loss=4.7674  (4.2s)
+epoch  39  train_loss=2.5207  val_loss=4.7103  (4.3s)
+epoch  40  train_loss=2.5323  val_loss=4.7670  (4.3s)
+
+=== evaluating HGNN (Thu Jul  9 07:50:27 AM EDT 2026) ===
+/home/trinity/miniconda3/envs/srp26/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:406: ConvergenceWarning: lbfgs failed to converge after 2000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=2000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/home/trinity/miniconda3/envs/srp26/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:406: ConvergenceWarning: lbfgs failed to converge after 2000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=2000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/home/trinity/miniconda3/envs/srp26/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:406: ConvergenceWarning: lbfgs failed to converge after 2000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=2000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+
+total labeled examples: 53739
+
+=== random_80_20  (train n=42992, test n=10747) ===
+  overall                  n= 10747  macro_F1=0.691  per_class_F1(stopped,slow,moving,fast)=[0.869, 0.262, 0.817, 0.816]
+  vru_only                 n=   935  macro_F1=0.609  per_class_F1(stopped,slow,moving,fast)=[0.841, 0.647, 0.582, 0.364]
+  low_point_count(<=5pts)  n=  1060  macro_F1=0.698  per_class_F1(stopped,slow,moving,fast)=[0.901, 0.27, 0.738, 0.884]
+  occlusion=NOT            n=  8539  macro_F1=0.704  per_class_F1(stopped,slow,moving,fast)=[0.874, 0.289, 0.83, 0.824]
+  occlusion=PARTIAL        n=  2137  macro_F1=0.615  per_class_F1(stopped,slow,moving,fast)=[0.858, 0.185, 0.725, 0.693]
+  occlusion=FULL           n=    71  macro_F1=0.660  per_class_F1(stopped,slow,moving,fast)=[0.71, 0.273, 0.833, 0.824]
+
+=== scenario_holdout(s01-03->s04)  (train n=45375, test n=8364) ===
+  overall                  n=  8364  macro_F1=0.627  per_class_F1(stopped,slow,moving,fast)=[0.9, 0.148, 0.752, 0.708]
+  vru_only                 n=0 (empty)
+  low_point_count(<=5pts)  n=  1210  macro_F1=0.643  per_class_F1(stopped,slow,moving,fast)=[0.95, 0.053, 0.685, 0.884]
+  occlusion=NOT            n=  8255  macro_F1=0.629  per_class_F1(stopped,slow,moving,fast)=[0.903, 0.149, 0.757, 0.707]
+  occlusion=PARTIAL        n=   108  macro_F1=0.546  per_class_F1(stopped,slow,moving,fast)=[0.711, 0.1, 0.372, 1.0]
+  occlusion=FULL           n=     1  macro_F1=0.250  per_class_F1(stopped,slow,moving,fast)=[1.0, 0.0, 0.0, 0.0]
+
+=== day_night_holdout(->NIGHT)  (train n=45375, test n=8364) ===
+  overall                  n=  8364  macro_F1=0.627  per_class_F1(stopped,slow,moving,fast)=[0.9, 0.148, 0.752, 0.708]
+  vru_only                 n=0 (empty)
+  low_point_count(<=5pts)  n=  1210  macro_F1=0.643  per_class_F1(stopped,slow,moving,fast)=[0.95, 0.053, 0.685, 0.884]
+  occlusion=NOT            n=  8255  macro_F1=0.629  per_class_F1(stopped,slow,moving,fast)=[0.903, 0.149, 0.757, 0.707]
+  occlusion=PARTIAL        n=   108  macro_F1=0.546  per_class_F1(stopped,slow,moving,fast)=[0.711, 0.1, 0.372, 1.0]
+  occlusion=FULL           n=     1  macro_F1=0.250  per_class_F1(stopped,slow,moving,fast)=[1.0, 0.0, 0.0, 0.0]
+
+=== evaluating GCN baseline (Thu Jul  9 07:54:22 AM EDT 2026) ===
+/home/trinity/miniconda3/envs/srp26/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:406: ConvergenceWarning: lbfgs failed to converge after 2000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=2000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/home/trinity/miniconda3/envs/srp26/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:406: ConvergenceWarning: lbfgs failed to converge after 2000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=2000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/home/trinity/miniconda3/envs/srp26/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:406: ConvergenceWarning: lbfgs failed to converge after 2000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=2000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+
+total labeled examples: 53739
+
+=== random_80_20  (train n=42992, test n=10747) ===
+  overall                  n= 10747  macro_F1=0.729  per_class_F1(stopped,slow,moving,fast)=[0.891, 0.348, 0.834, 0.844]
+  vru_only                 n=   935  macro_F1=0.688  per_class_F1(stopped,slow,moving,fast)=[0.876, 0.749, 0.595, 0.533]
+  low_point_count(<=5pts)  n=  1060  macro_F1=0.737  per_class_F1(stopped,slow,moving,fast)=[0.915, 0.348, 0.784, 0.901]
+  occlusion=NOT            n=  8539  macro_F1=0.741  per_class_F1(stopped,slow,moving,fast)=[0.895, 0.38, 0.84, 0.85]
+  occlusion=PARTIAL        n=  2137  macro_F1=0.673  per_class_F1(stopped,slow,moving,fast)=[0.88, 0.262, 0.795, 0.753]
+  occlusion=FULL           n=    71  macro_F1=0.657  per_class_F1(stopped,slow,moving,fast)=[0.746, 0.286, 0.741, 0.857]
+
+=== scenario_holdout(s01-03->s04)  (train n=45375, test n=8364) ===
+  overall                  n=  8364  macro_F1=0.656  per_class_F1(stopped,slow,moving,fast)=[0.886, 0.227, 0.753, 0.756]
+  vru_only                 n=0 (empty)
+  low_point_count(<=5pts)  n=  1210  macro_F1=0.690  per_class_F1(stopped,slow,moving,fast)=[0.946, 0.244, 0.698, 0.871]
+  occlusion=NOT            n=  8255  macro_F1=0.659  per_class_F1(stopped,slow,moving,fast)=[0.889, 0.233, 0.757, 0.759]
+  occlusion=PARTIAL        n=   108  macro_F1=0.373  per_class_F1(stopped,slow,moving,fast)=[0.607, 0.087, 0.296, 0.5]
+  occlusion=FULL           n=     1  macro_F1=0.250  per_class_F1(stopped,slow,moving,fast)=[1.0, 0.0, 0.0, 0.0]
+
+=== day_night_holdout(->NIGHT)  (train n=45375, test n=8364) ===
+  overall                  n=  8364  macro_F1=0.656  per_class_F1(stopped,slow,moving,fast)=[0.886, 0.227, 0.753, 0.756]
+  vru_only                 n=0 (empty)
+  low_point_count(<=5pts)  n=  1210  macro_F1=0.690  per_class_F1(stopped,slow,moving,fast)=[0.946, 0.244, 0.698, 0.871]
+  occlusion=NOT            n=  8255  macro_F1=0.659  per_class_F1(stopped,slow,moving,fast)=[0.889, 0.233, 0.757, 0.759]
+  occlusion=PARTIAL        n=   108  macro_F1=0.373  per_class_F1(stopped,slow,moving,fast)=[0.607, 0.087, 0.296, 0.5]
+  occlusion=FULL           n=     1  macro_F1=0.250  per_class_F1(stopped,slow,moving,fast)=[1.0, 0.0, 0.0, 0.0]
+
+=== done (Thu Jul  9 07:58:07 AM EDT 2026) ===

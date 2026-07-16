@@ -40,7 +40,7 @@ from data.graph_builder import (
 )
 from models.gcn_baseline import GCNModel
 from models.hgnn import HGNNModel
-from training.loss import combined_loss, strl_mse
+from training.loss import combined_loss, nt_xent
 
 MODEL_CLASSES = {"hgnn": HGNNModel, "gcn": GCNModel}
 
@@ -146,15 +146,25 @@ def run_epoch_r4(
     batch_losses: list[float] | None = None,
 ) -> float:
     """R4 has one fused view per frame (see H5's design notes) — no second
-    view to run NT-Xent across. Training here is H2's STRL temporal loss
-    alone: pull embeddings of the same tracked object, at two points in its
-    last `tracklet_k` frames, together. Structure (H1+H3+H4+H5) still comes
-    from `--hyperedges full`; this only replaces the *loss*, not the encoder.
+    view to run NT-Xent across. Training here uses H2's tracklet pairs
+    (same tracked object, two points within its last `tracklet_k` frames) as
+    the positive pairs for an NT-Xent-style contrastive loss over node
+    embeddings, in-batch negatives coming from the *other* sampled tracklets.
+
+    This is NOT plain `strl_mse`: raw MSE between two live (non-stop-gradient)
+    encoder outputs, with no negatives, lets the encoder trivially satisfy the
+    objective by collapsing every embedding to one constant vector — the
+    classic self-supervised collapse failure mode. An earlier version of this
+    function used strl_mse directly; loss dropped from 6e-3 to 1e-6 within 7
+    epochs, which is the collapse signature (not learning), so it was
+    corrected here. Structure (H1+H3+H4+H5) still comes from `hyperedges="full"`
+    inside `frame_to_graph`; only the loss changed.
     """
     training = optimizer is not None
     model.train(training)
     bev_threshold = cfg["hyperedges"]["bev_threshold"]
     batch_size = cfg["train"]["batch_size"]
+    tau = cfg["loss"]["tau"]
     h4_cfg = cfg["hyperedges"]
 
     rng = np.random.default_rng(0)
@@ -182,10 +192,10 @@ def run_epoch_r4(
                 s1s.append(emb_a[node_a])
                 s2s.append(emb_b[node_b])
 
-            if not s1s:
-                continue
+            if len(s1s) < 2:
+                continue  # NT-Xent needs >= 2 samples in the batch for negatives
 
-            loss = strl_mse(torch.stack(s1s), torch.stack(s2s))
+            loss = nt_xent(torch.stack(s1s), torch.stack(s2s), tau=tau)
 
             if training:
                 optimizer.zero_grad()

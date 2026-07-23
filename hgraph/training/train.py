@@ -221,12 +221,13 @@ def frame_to_graph(
 ) -> tuple[torch.Tensor, torch.Tensor]:
     """One label file -> (node_features, structure) tensors.
 
-    `structure` is the incidence matrix for "hgnn" (H1 alone, or H1+H3+H4,
-    +H5 when `include_h5` — R4 only, see `H5_ROADSIDE_SENSOR` — when
-    `hyperedges="full"`), or the plain BEV adjacency matrix for "gcn"
-    (ablation: same features, no hyperedges). H3 needs derived velocity, so
-    `kin_index` (from `build_kinematics_and_tracklets`) also feeds real
-    vx/vy/speed into the node features here — previously always zero.
+    `structure` is the incidence matrix for "hgnn" — H1 alone ("h1"), H1+H3
+    ("h1h3"), H1+H4 ("h1h4"), or H1+H3+H4 (+H5 when `include_h5` — R4 only,
+    see `H5_ROADSIDE_SENSOR`) when `hyperedges="full"` — or the plain BEV
+    adjacency matrix for "gcn" (ablation: same features, no hyperedges). H3
+    needs derived velocity, so `kin_index` (from
+    `build_kinematics_and_tracklets`) also feeds real vx/vy/speed into the
+    node features here — previously always zero.
     """
     frame = load_frame(path)
     kin = (kin_index or {}).get(path, {})
@@ -234,16 +235,17 @@ def frame_to_graph(
     xy = bev_xy(frame)
     if model_type == "hgnn":
         mats = [build_incidence_matrix(build_h1_hyperedges(xy, radius=bev_threshold))]
-        if hyperedges == "full":
+        if hyperedges in ("h1h3", "full"):
             vx = np.array([kin[o.uuid].vx if o.uuid in kin else 0.0 for o in frame.objects])
             vy = np.array([kin[o.uuid].vy if o.uuid in kin else 0.0 for o in frame.objects])
             h3_ids = build_h3_hyperedges(xy, vx, vy, horizon=h4_cfg["project_horizon"], radius=bev_threshold)
             mats.append(build_incidence_matrix(h3_ids))
+        if hyperedges in ("h1h4", "full"):
             classes = [o.cls for o in frame.objects]
             mats.append(build_h4_incidence(xy, classes, h4_cfg["vru_radius_veh"], h4_cfg["vru_radius_ped"]))
-            if include_h5:
-                sensor_ids = [o.sensor_id for o in frame.objects]
-                mats.append(build_h5_incidence(xy, sensor_ids, radius=bev_threshold, vehicle_weight=h4_cfg["v2x_init_weight"]))
+        if hyperedges == "full" and include_h5:
+            sensor_ids = [o.sensor_id for o in frame.objects]
+            mats.append(build_h5_incidence(xy, sensor_ids, radius=bev_threshold, vehicle_weight=h4_cfg["v2x_init_weight"]))
         struct = stack_incidence(mats, len(frame.objects))
     else:
         edges = bev_edges(xy, radius=bev_threshold)
@@ -352,11 +354,19 @@ def main():
     parser.add_argument("--dataset", choices=["r2", "r4"], default="r2")
     parser.add_argument("--model", choices=["hgnn", "gcn"], default="hgnn")
     parser.add_argument(
-        "--hyperedges", choices=["h1", "full"], default="h1",
-        help="hgnn only: 'h1' (proximity, original ablation) or 'full' (H1+H3+H4). "
+        "--hyperedges", choices=["h1", "h1h3", "h1h4", "full"], default="h1",
+        help="hgnn only: 'h1' (proximity, original ablation), 'h1h3' (+converging), "
+             "'h1h4' (+VRU proximity), or 'full' (H1+H3+H4). "
              "Ignored for --dataset r4, which always trains full H1+H3+H4+H5.",
     )
     parser.add_argument("--strl", action="store_true", help="r2 only: add the H2 tracklet STRL loss on top of NT-Xent")
+    parser.add_argument(
+        "--real-velocity", action="store_true",
+        help="r2 only: derive real velocity and feed it into node features even when "
+             "--hyperedges doesn't structurally need it (e.g. 'h1'). Isolates the "
+             "velocity-feature effect from hyperedge structure for ablations. "
+             "Implied whenever --hyperedges needs it ('h1h3'/'full') or --strl is set.",
+    )
     parser.add_argument("--scenarios", nargs="+", default=["r2_s01", "r2_s02", "r2_s03"])
     parser.add_argument("--val-scenarios", nargs="+", default=["r2_s04"])
     parser.add_argument("--r4-train-split", default="train")
@@ -387,13 +397,15 @@ def main():
         train_pairs = build_pair_index(r2_root, args.scenarios, max_dt)
         val_pairs = build_pair_index(r2_root, args.val_scenarios, max_dt)
         print(f"model: {args.model}  hyperedges: {args.hyperedges}  strl: {args.strl}  "
+              f"real_velocity: {args.real_velocity}  "
               f"train pairs: {len(train_pairs)}  val pairs: {len(val_pairs)}  device: {device}")
 
         # H3 needs real velocity (not the zero default) and H2/STRL needs tracklet
-        # pairs, so build both whenever either feature is requested.
+        # pairs, so build both whenever either feature is requested — also whenever
+        # --real-velocity is set explicitly, to isolate the feature effect alone.
         train_kin, train_tracklets = ({}, [])
         val_kin, val_tracklets = ({}, [])
-        if args.hyperedges == "full" or args.strl:
+        if args.hyperedges in ("h1h3", "full") or args.strl or args.real_velocity:
             train_kin, train_tracklets = build_kinematics_and_tracklets(r2_root, args.scenarios, kin_cfg, tracklet_k)
             val_kin, val_tracklets = build_kinematics_and_tracklets(r2_root, args.val_scenarios, kin_cfg, tracklet_k, seed=1)
             print(f"H2 tracklet pairs: train {len(train_tracklets)}  val {len(val_tracklets)}")
@@ -412,7 +424,12 @@ def main():
     if args.dataset == "r4":
         tag = args.model + "_r4_v2x"
     else:
-        tag = args.model + ("_full" if args.hyperedges == "full" else "") + ("_strl" if args.strl else "")
+        hyperedges_tag = {"h1": "", "h1h3": "_h1h3", "h1h4": "_h1h4", "full": "_full"}[args.hyperedges]
+        tag = (
+            args.model + hyperedges_tag
+            + ("_strl" if args.strl else "")
+            + ("_realvel" if args.real_velocity else "")
+        )
     log_path = os.path.join(output_dir, f"train_log_{tag}.csv")
     with open(log_path, "w", newline="") as f:
         csv.writer(f).writerow(["epoch", "train_loss", "val_loss", "seconds"])

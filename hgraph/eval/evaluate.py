@@ -103,13 +103,14 @@ def extract_examples(
 
             if is_hgnn:
                 mats = [build_incidence_matrix(build_h1_hyperedges(xy, radius=bev_threshold))]
-                if hyperedges == "full":
+                if hyperedges in ("h1h3", "full"):
                     vx = np.array([kin[o.uuid].vx if o.uuid in kin else 0.0 for o in frame.objects])
                     vy = np.array([kin[o.uuid].vy if o.uuid in kin else 0.0 for o in frame.objects])
                     h3_ids = build_h3_hyperedges(
                         xy, vx, vy, horizon=cfg["hyperedges"]["project_horizon"], radius=bev_threshold
                     )
                     mats.append(build_incidence_matrix(h3_ids))
+                if hyperedges in ("h1h4", "full"):
                     classes = [o.cls for o in frame.objects]
                     mats.append(build_h4_incidence(
                         xy, classes, cfg["hyperedges"]["vru_radius_veh"], cfg["hyperedges"]["vru_radius_ped"]
@@ -228,7 +229,7 @@ def main():
     parser.add_argument("--checkpoint", required=True)
     parser.add_argument("--model", choices=["hgnn", "gcn"], default="hgnn")
     parser.add_argument(
-        "--hyperedges", choices=["h1", "full"], default="h1",
+        "--hyperedges", choices=["h1", "h1h3", "h1h4", "full"], default="h1",
         help="hgnn only: must match the --hyperedges the checkpoint was trained with",
     )
     parser.add_argument("--scenarios", nargs="+", default=["r2_s01", "r2_s02", "r2_s03", "r2_s04"])

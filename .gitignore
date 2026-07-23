@@ -4,9 +4,11 @@ claude.md
 make_figures.py
 
 # DATA
-dataset_reports
-r2
-r4
+dataset_reports/
+r2/
+r4/
+r4_full
+r4_full_dataset/
 
 # outputs
 hgraph/outputs/

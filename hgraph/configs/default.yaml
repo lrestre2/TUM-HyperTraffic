@@ -3,7 +3,7 @@
 
 paths:
   r2_root: r2
-  r4_root: r4
+  r4_root: r4_full_dataset  # full TUMTraf-V2X release (1,000 frames); mini (500 frames) kept at r4/
   output_dir: hgraph/outputs
 
 hyperedges:

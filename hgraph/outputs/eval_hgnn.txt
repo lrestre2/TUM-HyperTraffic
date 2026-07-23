@@ -1,26 +1,52 @@
+/home/trinity/miniconda3/envs/srp26/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:406: ConvergenceWarning: lbfgs failed to converge after 2000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=2000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/home/trinity/miniconda3/envs/srp26/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:406: ConvergenceWarning: lbfgs failed to converge after 2000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=2000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
+/home/trinity/miniconda3/envs/srp26/lib/python3.11/site-packages/sklearn/linear_model/_logistic.py:406: ConvergenceWarning: lbfgs failed to converge after 2000 iteration(s) (status=1):
+STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT
+
+Increase the number of iterations to improve the convergence (max_iter=2000).
+You might also want to scale the data as shown in:
+    https://scikit-learn.org/stable/modules/preprocessing.html
+Please also refer to the documentation for alternative solver options:
+    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+  n_iter_i = _check_optimize_result(
 total labeled examples: 53739
 
 === random_80_20  (train n=42992, test n=10747) ===
-  overall                  n= 10747  macro_F1=0.691  per_class_F1(stopped,slow,moving,fast)=[0.869, 0.262, 0.817, 0.816]
-  vru_only                 n=   935  macro_F1=0.609  per_class_F1(stopped,slow,moving,fast)=[0.841, 0.647, 0.582, 0.364]
-  low_point_count(<=5pts)  n=  1060  macro_F1=0.698  per_class_F1(stopped,slow,moving,fast)=[0.901, 0.27, 0.738, 0.884]
-  occlusion=NOT            n=  8539  macro_F1=0.704  per_class_F1(stopped,slow,moving,fast)=[0.874, 0.289, 0.83, 0.824]
-  occlusion=PARTIAL        n=  2137  macro_F1=0.615  per_class_F1(stopped,slow,moving,fast)=[0.858, 0.185, 0.725, 0.693]
-  occlusion=FULL           n=    71  macro_F1=0.660  per_class_F1(stopped,slow,moving,fast)=[0.71, 0.273, 0.833, 0.824]
+  overall                  n= 10747  macro_F1=0.701  per_class_F1(stopped,slow,moving,fast)=[0.869, 0.297, 0.82, 0.818]
+  vru_only                 n=   935  macro_F1=0.626  per_class_F1(stopped,slow,moving,fast)=[0.843, 0.672, 0.558, 0.429]
+  low_point_count(<=5pts)  n=  1060  macro_F1=0.709  per_class_F1(stopped,slow,moving,fast)=[0.901, 0.286, 0.76, 0.891]
+  occlusion=NOT            n=  8539  macro_F1=0.710  per_class_F1(stopped,slow,moving,fast)=[0.87, 0.315, 0.826, 0.828]
+  occlusion=PARTIAL        n=  2137  macro_F1=0.637  per_class_F1(stopped,slow,moving,fast)=[0.868, 0.243, 0.775, 0.662]
+  occlusion=FULL           n=    71  macro_F1=0.738  per_class_F1(stopped,slow,moving,fast)=[0.712, 0.435, 0.929, 0.875]
 
 === scenario_holdout(s01-03->s04)  (train n=45375, test n=8364) ===
-  overall                  n=  8364  macro_F1=0.627  per_class_F1(stopped,slow,moving,fast)=[0.9, 0.148, 0.752, 0.708]
+  overall                  n=  8364  macro_F1=0.640  per_class_F1(stopped,slow,moving,fast)=[0.896, 0.247, 0.744, 0.673]
   vru_only                 n=0 (empty)
-  low_point_count(<=5pts)  n=  1210  macro_F1=0.643  per_class_F1(stopped,slow,moving,fast)=[0.95, 0.053, 0.685, 0.884]
-  occlusion=NOT            n=  8255  macro_F1=0.629  per_class_F1(stopped,slow,moving,fast)=[0.903, 0.149, 0.757, 0.707]
-  occlusion=PARTIAL        n=   108  macro_F1=0.546  per_class_F1(stopped,slow,moving,fast)=[0.711, 0.1, 0.372, 1.0]
+  low_point_count(<=5pts)  n=  1210  macro_F1=0.661  per_class_F1(stopped,slow,moving,fast)=[0.953, 0.152, 0.642, 0.895]
+  occlusion=NOT            n=  8255  macro_F1=0.640  per_class_F1(stopped,slow,moving,fast)=[0.896, 0.248, 0.746, 0.671]
+  occlusion=PARTIAL        n=   108  macro_F1=0.601  per_class_F1(stopped,slow,moving,fast)=[0.903, 0.0, 0.5, 1.0]
   occlusion=FULL           n=     1  macro_F1=0.250  per_class_F1(stopped,slow,moving,fast)=[1.0, 0.0, 0.0, 0.0]
 
 === day_night_holdout(->NIGHT)  (train n=45375, test n=8364) ===
-  overall                  n=  8364  macro_F1=0.627  per_class_F1(stopped,slow,moving,fast)=[0.9, 0.148, 0.752, 0.708]
+  overall                  n=  8364  macro_F1=0.640  per_class_F1(stopped,slow,moving,fast)=[0.896, 0.247, 0.744, 0.673]
   vru_only                 n=0 (empty)
-  low_point_count(<=5pts)  n=  1210  macro_F1=0.643  per_class_F1(stopped,slow,moving,fast)=[0.95, 0.053, 0.685, 0.884]
-  occlusion=NOT            n=  8255  macro_F1=0.629  per_class_F1(stopped,slow,moving,fast)=[0.903, 0.149, 0.757, 0.707]
-  occlusion=PARTIAL        n=   108  macro_F1=0.546  per_class_F1(stopped,slow,moving,fast)=[0.711, 0.1, 0.372, 1.0]
+  low_point_count(<=5pts)  n=  1210  macro_F1=0.661  per_class_F1(stopped,slow,moving,fast)=[0.953, 0.152, 0.642, 0.895]
+  occlusion=NOT            n=  8255  macro_F1=0.640  per_class_F1(stopped,slow,moving,fast)=[0.896, 0.248, 0.746, 0.671]
+  occlusion=PARTIAL        n=   108  macro_F1=0.601  per_class_F1(stopped,slow,moving,fast)=[0.903, 0.0, 0.5, 1.0]
   occlusion=FULL           n=     1  macro_F1=0.250  per_class_F1(stopped,slow,moving,fast)=[1.0, 0.0, 0.0, 0.0]
-

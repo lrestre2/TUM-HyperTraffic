@@ -96,6 +96,43 @@ def build_h1_hyperedges(xy: np.ndarray, radius: float = 10.0) -> np.ndarray:
     return ids
 
 
+def hyperedge_cluster_sizes(hyperedge_ids: np.ndarray) -> np.ndarray:
+    """(N,) hyperedge ids -> (N,) size of each node's own cluster.
+
+    E.g. `build_h1_hyperedges` ids of `[0, 0, 1, 2, 2, 2]` -> sizes
+    `[2, 2, 1, 3, 3, 3]`: nodes 0/1 share a 2-member cluster, node 2 is
+    isolated, nodes 3/4/5 share a 3-member cluster.
+    """
+    if len(hyperedge_ids) == 0:
+        return np.zeros(0, dtype=np.int64)
+    counts = np.bincount(hyperedge_ids)
+    return counts[hyperedge_ids]
+
+
+# Proxy-task labels for the H1 cluster-size classification task (see
+# `eval/evaluate.py --task cluster_size`): predicting how many other objects
+# share a node's own BEV-proximity cluster. Unlike speed-state (a bucketed
+# function of the node's own vx/vy/speed feature), cluster size cannot be
+# read off a single node's feature vector — it requires knowing every other
+# object's position in the scene, so a linear probe can only succeed here if
+# the encoder's message-passing actually aggregated neighbor information.
+# Bucket edges were chosen from the empirical R2 cluster-size distribution
+# (isolated=30.5%, pair=19.3%, small_group(3-4)=25.5%, crowd(5+)=24.7%).
+CLUSTER_SIZE_NAMES = ["isolated", "pair", "small_group", "crowd"]
+CLUSTER_SIZE_LABELS = [0, 1, 2, 3]
+
+
+def cluster_size_label(size: int) -> int:
+    """Bucket an H1 cluster size into the 4 `CLUSTER_SIZE_NAMES` classes."""
+    if size <= 1:
+        return 0
+    if size == 2:
+        return 1
+    if size <= 4:
+        return 2
+    return 3
+
+
 def build_incidence_matrix(hyperedge_ids: np.ndarray) -> np.ndarray:
     """Hard-membership incidence matrix H, shape (N_objects, N_hyperedges)."""
     n = len(hyperedge_ids)

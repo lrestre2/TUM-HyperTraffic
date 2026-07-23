@@ -122,11 +122,30 @@ def build_r4_kinematics_and_tracklets(
 ) -> tuple[dict, list[tuple[str, int, str, int]]]:
     """Same as `build_kinematics_and_tracklets`, for R4's single registered
     (fused roadside+vehicle) label sequence — no north/south pairing to do.
+
+    R4's train/val/test are an *interleaved* split of one continuous
+    1,000-frame sequence, not independent sequences: merging all three by
+    timestamp recovers a dense ~0.1s-spaced stream (roughly every 10th frame
+    is held out), so a frame's true previous observation for velocity
+    derivation is very often filed under a *different* split. Deriving
+    kinematics from `split`'s own frames in isolation therefore starves the
+    minority splits (measured: 0/100 `test` frames and only 11/100 `val`
+    frames got any velocity that way, vs. 377/800 for `train`). Kinematics
+    are instead derived once over all three splits merged and
+    timestamp-sorted (same fix as `eval/evaluate.py`'s `extract_examples_r4`);
+    tracklet-pair sampling still only draws from `split`'s own frames, so
+    train/val stay properly separated for the SSL objective itself.
     """
     rng = random.Random(seed)
     frames = load_sequence(r4_sensor_dir(r4_root, split))
-    kin_list = derive_kinematics(frames, **kin_cfg)
-    kin_index = {frame.path: kin for frame, kin in zip(frames, kin_list)}
+
+    all_frames = sorted(
+        (f for s in ("train", "val", "test") for f in load_sequence(r4_sensor_dir(r4_root, s))),
+        key=lambda f: f.timestamp,
+    )
+    kin_list = derive_kinematics(all_frames, **kin_cfg)
+    kin_index = {frame.path: kin for frame, kin in zip(all_frames, kin_list)}
+
     tracklet_pairs = [
         (frames[tp.frame_idx_a].path, tp.node_idx_a, frames[tp.frame_idx_b].path, tp.node_idx_b)
         for tp in build_tracklet_pairs(frames, k=tracklet_k, rng=rng)
